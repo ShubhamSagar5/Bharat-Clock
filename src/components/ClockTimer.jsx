@@ -1,13 +1,27 @@
 import React from "react";
+import { useState,useEffect } from 'react'
 
 const ClockTimer = () => {
-  const date = new Date();
+  
+
+ const [time, setTime] = useState(new Date())
+
+ useEffect(() => {
+  const intervalId =  setInterval(()=>{
+    setTime(new Date())
+   },1000)
+ 
+   return () => {
+     clearInterval(intervalId)
+   }
+ }, [])
+ 
 
   return (
     <div>
       <p className='lead'>
-        This is Current Time :- {date.toLocaleDateString()} -{" "}
-        {date.toLocaleTimeString()}
+        This is Current Time :- {time.toLocaleDateString()} -{" "}
+        {time.toLocaleTimeString()}
       </p>
     </div>
   );
